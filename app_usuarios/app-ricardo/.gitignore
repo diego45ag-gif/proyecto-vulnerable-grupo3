@@ -1,0 +1,19 @@
+# Archivos de configuración local sensibles
+#Al ser una práctica se ha configurado como .env.example
+.env
+
+# Entornos virtuales de Python
+venv/
+.venv/
+env/
+
+# Archivos temporales de Python y Flask
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db

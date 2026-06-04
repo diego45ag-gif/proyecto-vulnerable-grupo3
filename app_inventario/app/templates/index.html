@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App de Inventario - Grupo 3</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Gestión de Inventario</h1>
+        <p class="descripcion">Panel de control de productos </p>
+
+        <div class="estadisticas">
+            <div class="stat">
+                <span class="numero">{{ stats.total }}</span>
+                <span class="etiqueta">Productos</span>
+            </div>
+            <div class="stat">
+                <span class="numero">${{ "%.2f" | format(stats.valor_total) }}</span>
+                <span class="etiqueta">Valor Total</span>
+            </div>
+            <div class="stat alerta">
+                <span class="numero">{{ stats.sin_stock }}</span>
+                <span class="etiqueta">Sin Stock</span>
+            </div>
+            <div class="stat advertencia">
+                <span class="numero">{{ stats.stock_bajo }}</span>
+                <span class="etiqueta">Stock Bajo</span>
+            </div>
+        </div>
+
+        <a href="/agregar" class="btn-agregar">+ Agregar Nuevo Producto</a>
+
+        <form action="/buscar" method="GET" class="form-busqueda">
+            <input type="text" name="nombre" placeholder="Buscar por nombre..." value="{{ query or '' }}">
+            <select name="categoria">
+                <option value="Todas">Todas las categorías</option>
+                {% for cat in categorias %}
+                    <option value="{{ cat }}" {% if categoria == cat %} selected {% endif %}>{{ cat }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Buscar</button>
+            <a href="/" class="btn-limpiar">Limpiar</a>
+        </form>
+
+        <div class="productos-lista">
+            {% if productos %}
+                <ul>
+                {% for producto in productos %}
+                    <li>
+                        <div class="producto-info">
+                            <span class="nombre">{{ producto.nombre }}</span>
+                            <span class="categoria">{{ producto.categoria }}</span>
+                            <span class="precio">${{ "%.2f" | format(producto.precio) }}</span>
+                            
+                            {% if producto.stock == 0 %}
+                                <span class="stock sin-stock">Sin stock</span>
+                            {% elif producto.stock < producto.stock_minimo %}
+                                <span class="stock stock-bajo">Stock bajo: {{ producto.stock }}</span>
+                            {% else %}
+                                <span class="stock">Stock: {{ producto.stock }}</span>
+                            {% endif %}
+                            
+                            <div class="acciones">
+                                <a href="/editar/{{ producto.id }}" class="editar">Editar</a>
+                                <form action="/eliminar/{{ producto.id }}" method="POST" style="display:inline;">
+                                    <button type="submit" class="eliminar" onclick="return confirm('¿Seguro que deseas eliminar este producto?')">Eliminar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <p>No hay productos en el inventario que coincidan con tu búsqueda.</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

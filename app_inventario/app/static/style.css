@@ -1,0 +1,70 @@
+/* Paleta estándar del Grupo 3 */
+:root {
+    --fondo-general: #f4f6f8;
+    --contenedor: white;
+    --fondo-item: #eef1f4;
+    --texto-principal: #333;
+    --texto-secundario: #555;
+    --texto-claro: #777;
+    --accion: #0066cc;
+    --eliminar: #cc0000;
+    --exito: #28a745;
+    --advertencia: #ffc107;
+    --peligro: #dc3545;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--fondo-general);
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 90%;
+    max-width: 900px; /* Un poco más ancho que los otros proyectos */
+    margin: 40px auto;
+    background-color: var(--contenedor);
+    padding: 25px;
+    border-radius: 8px;
+}
+
+h1 { text-align: center; color: var(--texto-principal); }
+.descripcion { text-align: center; color: var(--texto-secundario); margin-bottom: 30px; }
+
+/* Estadísticas */
+.estadisticas { display: flex; justify-content: space-around; background: var(--fondo-item); padding: 15px; border-radius: 5px; margin-bottom: 20px; text-align: center; }
+.stat .numero { display: block; font-size: 24px; font-weight: bold; }
+.stat .etiqueta { font-size: 14px; color: var(--texto-secundario); }
+.stat.alerta .numero { color: var(--peligro); }
+.stat.advertencia .numero { color: var(--advertencia); }
+
+/* Formulario de Búsqueda */
+.form-busqueda { display: flex; gap: 10px; margin-bottom: 20px; }
+.form-busqueda input { flex: 2; padding: 10px; border: 1px solid #ccc; border-radius: 4px;}
+.form-busqueda select { flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 4px;}
+.form-busqueda button { padding: 10px 15px; background-color: var(--accion); color: white; border: none; border-radius: 4px; cursor: pointer; }
+.btn-limpiar { padding: 10px 15px; background-color: #6c757d; color: white; text-decoration: none; border-radius: 4px; }
+.btn-agregar { display: inline-block; padding: 10px 15px; background-color: var(--exito); color: white; text-decoration: none; border-radius: 4px; margin-bottom: 20px; font-weight: bold; }
+
+/* Tabla de Productos */
+.productos-lista { margin-top: 20px; }
+.productos-lista ul { list-style: none; padding: 0; }
+.productos-lista li { background-color: var(--fondo-item); margin-bottom: 10px; padding: 15px; border-radius: 5px; }
+.producto-info { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr auto; gap: 15px; align-items: center; }
+.producto-info .nombre { font-weight: bold; color: var(--texto-principal); }
+.producto-info .categoria { color: var(--texto-secundario); font-size: 14px; }
+.producto-info .precio { color: var(--exito); font-weight: bold; }
+
+/* Alertas de Stock */
+.stock { color: var(--exito); font-weight: bold; }
+.stock-bajo { color: var(--advertencia); background-color: #fff3cd; padding: 3px 8px; border-radius: 3px; }
+.sin-stock { color: var(--peligro); background-color: #f8d7da; padding: 3px 8px; border-radius: 3px; }
+
+/* Acciones y Formularios CRUD */
+.acciones a { color: var(--accion); text-decoration: none; margin-right: 10px; font-weight: bold; }
+.acciones button.eliminar { background: none; border: none; color: var(--eliminar); cursor: pointer; font-weight: bold; padding: 0; }
+.form-crud { display: flex; flex-direction: column; gap: 15px; }
+.form-crud input, .form-crud select, .form-crud textarea { padding: 10px; border: 1px solid #ccc; border-radius: 4px; width: 100%; box-sizing: border-box; }
+.form-crud button { padding: 10px 15px; background-color: var(--accion); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
+.errores { color: var(--peligro); background-color: #f8d7da; padding: 10px; border-radius: 4px; margin-bottom: 15px; }

@@ -1,0 +1,9 @@
+services:
+  app-login:
+    build: .
+    container_name: mi_autenticador
+    ports:
+      - "5001:5001"
+    environment:
+    #Si se modifica en nombre del archivo .env.example, sustituimos la calve por '${SECRET_KEY}' pra que funcione correctamente manteniendo la seguridad
+      - SECRET_KEY=ClavE_SupeR_SecRetA_S-SDLC_2026

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestor de Tareas Seguro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <main class="container">
+        <h1>Gestor de Tareas Seguro</h1>
+
+        <p class="descripcion">
+            Aplicación sencilla para crear, completar y eliminar tareas.
+        </p>
+
+        <form action="/add" method="POST">
+            <input type="text" name="tarea" placeholder="Escribe una tarea" maxlength="100" required>
+            <button type="submit">Añadir</button>
+        </form>
+
+        <section class="lista">
+            <h2>Mis tareas</h2>
+
+            {% if tareas %}
+                <ul>
+                    {% for tarea in tareas %}
+                        <li>
+                            {% if tarea.completada %}
+                                <span class="completada">{{ tarea.texto }}</span>
+                            {% else %}
+                                <span>{{ tarea.texto }}</span>
+                            {% endif %}
+
+                            <div class="acciones">
+                                {% if not tarea.completada %}
+                                    <a href="/complete/{{ loop.index0 }}">Completar</a>
+                                {% endif %}
+                                <a href="/delete/{{ loop.index0 }}" class="eliminar">Eliminar</a>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No hay tareas todavía.</p>
+            {% endif %}
+        </section>
+    </main>
+
+</body>
+</html>

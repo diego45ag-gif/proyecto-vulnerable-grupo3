@@ -1,0 +1,24 @@
+services:
+  # App de Notas (Alejandro) 
+  app-notas:
+    build: ./app_notas
+    ports:
+      - "5000:5000"
+
+  # App de Usuarios (Ricardo) 
+  app-usuarios:
+    build: ./app_usuarios/app-ricardo
+    ports:
+      - "5001:5001"
+
+  # App de Inventario (Diego) 
+  app-inventario:
+    build: ./app_inventario
+    ports:
+      - "5002:5002"
+
+  # Gestor de Tareas (Ignacio) 
+  app-tareas:
+    build: ./app_tareas/Gestor-Tareas_ignacio
+    ports:
+      - "5003:5003"
