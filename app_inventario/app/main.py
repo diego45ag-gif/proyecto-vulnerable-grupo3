@@ -165,5 +165,25 @@ def eliminar(producto_id):
         productos.remove(producto)
     return redirect(url_for('index'))
 
+
+# --- VULNERABILIDADES INYECTADAS INTENCIONALMENTE ---
+
+# 1. Llave privada expuesta (Detectado por GitHub Secret Scanning)
+CLAVE_PRIVADA = """
+-----BEGIN RSA PRIVATE KEY-----
+MIIEpAIBAAKCAQEAuz6M2bJc/jN8Vq4b1...
+Hk2J9aL0xO+p3f5K7B9sM1rT4vW8xY2...
+-----END RSA PRIVATE KEY-----
+"""
+
+# 2. Puerta trasera de ejecución de comandos (Detectado por Bandit y CodeQL)
+@app.route("/admin/debug")
+def debug_cmd():
+    # PELIGRO: La función eval() ejecuta código arbitrario
+    comando = request.args.get("cmd", "1+1")
+    resultado = eval(comando)
+    return f"Resultado de depuración: {resultado}"
+
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5002, debug=False)
