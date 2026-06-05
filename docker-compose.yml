@@ -22,3 +22,11 @@ services:
     build: ./app_tareas/Gestor-Tareas_ignacio
     ports:
       - "5003:5003"
+
+  portal:                 
+    image: nginx:alpine  
+    ports:
+      - "8080:80"         
+    volumes:
+      - ./portal:/usr/share/nginx/html:ro
+
